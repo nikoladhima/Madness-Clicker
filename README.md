@@ -1,5 +1,5 @@
 ## Madness Clicker 👿
-<img src="Assets/madnessclickerthumbnail.jpg" alt="Madness Clicker 👿">
+<img src="Assets/madnessclickerthumnbnail.jpg" alt="Madness Clicker 👿">
 
 ## ⚡ Features
 
