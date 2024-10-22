@@ -1,0 +1,440 @@
+--local CoreGui = game:GetService("StarterGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Madness Clicker👿 ||| https://github.com/nikoladhima", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionConfigs"})
+
+local Tab = Window:MakeTab({
+	Name = "Automations",
+	Icon = "rbxassetid://122341342375300",
+	PremiumOnly = false
+})
+
+
+local Section = Tab:AddSection({
+	Name = "Autofarm"
+})
+
+_G.Autoclicker = false
+_G.GroupChest = false
+_G.DailyChest = false
+_G.ClickMultiplier = false
+_G.CursorDamage = false
+_G.Health = false
+_G.JumpUpgrade = false
+_G.SpeedUpgrade = false
+_G.PetStorage = false
+_G.BossHit = false
+_G.TwoxDamage = false
+_G.XtwoHealth = false
+_G.PetSlots = false
+_G.SuperPetStorage =  false
+
+--Tab:AddParagraph("IMPORTANT NOTE","")
+
+Tab:AddToggle({
+    Name = "Autoclicker",
+	Default = false,
+    Callback = function(state)
+        _G.Autoclicker = state
+
+        while _G.Autoclicker do
+            local args = {
+                [1] = 1
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.ClickService.Click:FireServer(unpack(args))
+            task.wait()
+        end
+    end
+})
+
+local Section = Tab:AddSection({
+	Name = "Chests"
+})
+
+Tab:AddButton({
+    Name = "Claim Group Chest (Join group first)",
+    Default = false,
+    Callback = function()
+            local args = {
+                [1] = "group1"
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.ChestService.OpenChest:FireServer(unpack(args))
+    end
+})
+
+Tab:AddButton({
+    Name = "Claim Daily Chest",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "ChestOpens"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.DataService.Get:InvokeServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Claim Group Chest",
+    Default = false,
+    Callback = function(state)
+        _G.GroupChest = state
+        
+        while _G.GroupChest do
+            local args = {
+                [1] = "group1"
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.ChestService.OpenChest:FireServer(unpack(args))
+            task.wait(5)
+        end
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Claim Daily Chest",
+    Default = false,
+    Callback = function(state)
+        _G.DailyChest = state
+
+        while _G.DailyChest do
+            local args = {
+                [1] = "ChestOpens"
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.DataService.Get:InvokeServer(unpack(args))
+            task.wait(5)
+        end
+    end
+})
+
+local Section = Tab:AddSection({
+	Name = "Upgrades"
+})
+
+Tab:AddButton({
+    Name = "Buy Click Multiplier x1 (Max 20k)",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "ClickMultiply"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Click Multiplier",
+    default = false,
+    Callback = function(state)
+        _G.ClickMultiplier = state
+
+        while _G.ClickMultiplier do
+        local args = {
+            [1] = "ClickMultiply"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Cursor Damage x1 (Max 300)",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "CursorDamage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Cursor Damage",
+    Default = false,
+    Callback = function(state)
+        _G.CursorDamage = state
+
+        while _G.CursorDamage do
+        local args = {
+            [1] = "CursorDamage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Health x1 (Max 300)",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "Health"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Health",
+    Default = false,
+    Callback = function(state)
+        _G.Health = state
+
+        while _G.Health do
+            local args = {
+                [1] = "Health"
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Jump Upgrade x1 (Max 35)",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "JumpPower"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Jump Upgrade",
+    Default = false,
+    Callback = function(state)
+        _G.JumpUpgrade = state
+
+        while _G.JumpUpgrade do
+        local args = {
+            [1] = "JumpPower"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Speed Upgrade x1 (Max 35)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "WalkSpeed"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Speed Upgrade",
+    default = false,
+    Callback = function(state)
+        _G.SpeedUpgrade = state
+
+        while _G.SpeedUpgrade do
+        local args = {
+            [1] = "WalkSpeed"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Pet Storage x1 (Max 470)",
+    Default = false,
+    Callback = function()
+        local args = {
+            [1] = "PetStorage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Pet Storage",
+    Default = false,
+    Callback = function(state)
+        _G.PetStorage = state
+
+        while _G.PetStorage do
+        local args = {
+            [1] = "PetStorage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.UpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddSection({
+    Name = "Super Upgrades",
+})
+
+Tab:AddButton({
+    Name = "1+ Boss Hit (Max 10)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "BossHit"
+        }
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy 1+ Boss hit",
+    default = false,
+    Callback = function(state)
+        _G.BossHit = state
+
+        while _G.BossHit do
+        local args = {
+            [1] = "BossHit"
+        }
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "2x Damage (Max 5000)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "DoubleDamage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy 2x Damage",
+    default = false,
+    Callback = function(state)
+        _G.TwoxDamage = state
+
+        while _G.TwoxDamage  do
+            local args = {
+                [1] = "DoubleDamage"
+            }
+            
+            game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+            task.wait()
+        end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy 2x Health (Max 5000)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "DoubleHealth"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy 2x Health",
+    default = false,
+    Callback = function(state)
+        _G.XtwoHealth = state
+
+        while _G.XtwoHealth do
+        local args = {
+            [1] = "DoubleHealth"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+Tab:AddButton({
+    Name = "Buy Pet Slot (Max 10)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "PetSlots"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Pet Slots",
+    default = false,
+    Callback = function(state)
+        _G.PetSlots = state
+
+        while _G.PetSlots do
+        local args = {
+            [1] = "PetSlots"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    task.wait()
+    end
+end
+})
+
+Tab:AddButton({
+    Name = "Buy Pet Storage (Max 50)",
+    default = false,
+    Callback = function()
+        local args = {
+            [1] = "PetStorage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Buy Pet Storage",
+    default = false,
+    Callback = function(state)
+        _G.SuperPetStorage = state
+
+        while _G.SuperPetStorage do
+        local args = {
+            [1] = "PetStorage"
+        }
+        
+        game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService.BuyUpgrade:FireServer(unpack(args))
+        task.wait()
+    end
+    end
+})
+
+OrionLib:Init()
